@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { PageModule } from './page/page.module';
 import { AuthModule } from './auth/auth.module';
+import { IncrementadorComponent } from './component/incrementador/incrementador.component';
+import { ComponentesModule } from './component/componentes.module';
+import { PendingChangesGuardGuard } from './guard/pending-changes-guard.guard';
 
 
 
@@ -14,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
   declarations: [
     AppComponent,
     NopagefoundComponent,
+    
  
   ],
   imports: [
@@ -22,7 +26,7 @@ import { AuthModule } from './auth/auth.module';
     PageModule,
     AuthModule
   ],
-  providers: [],
+  providers: [PendingChangesGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

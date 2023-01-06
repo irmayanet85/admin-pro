@@ -25,6 +25,7 @@ var pluginName = "dropify";
  * @param {Array} options
  */
 function Dropify(element, options) {
+    console.log("entrando al dropify");
     if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
         return;
     }

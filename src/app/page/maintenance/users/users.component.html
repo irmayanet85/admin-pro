@@ -1,0 +1,111 @@
+<div class="row   ">
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    
+                    <div class="col-md-12">
+                        <!-- <input 
+                        type="text" 
+                        placeholder="Buscar ..."
+                        (keyup.enter)="Search()"
+                        #txtSearch
+                        class="form-control form-control-line"> -->
+                        <input 
+                        type="text" 
+                        placeholder="Buscar2 ..."
+                        [(ngModel)] = search
+                        (keyup.enter)="Search()"
+                        class="form-control form-control-line">
+                    </div>
+                   
+                   
+                </div>
+                
+
+            </div>
+          </div>
+       
+           
+        </div>
+</div>
+
+
+
+<div class="row animated fadeInDown" *ngIf="!list else loading">
+
+    <div class="col-12">
+      <div class="alert alert-info text-center" role="alert">
+        <h4 class="alert-heading">Cargando</h4>
+          <i class="fa fa-spin fa-2x  fa-refresh " aria-hidden="true"></i>
+        <p class="mb-0"></p>
+      </div>
+    </div>
+</div>
+<ng-template #loading>
+</ng-template>
+
+    <div class="row">
+
+        <div class="col-12">
+            <div class="card" *ngIf="total > 0">
+                <div class="card-body">
+                    <h4 class="card-title">Usuarios</h4>
+                    <h6 class="card-subtitle">Usuarios registrados en esta aplicacion.</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>Name</th>
+                                    <th>email</th>
+                                    <th>Role</th>
+                                    <th class="text-nowrap">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of list">
+                                    <td class=" text-center cursor "> 
+                                        <app-cargar-img [objetselected]="user" [typeObject] = "'user'"></app-cargar-img>
+                                        
+                                          
+                                    </td>
+                                    <td>{{user.name}}</td>
+                                    <td>
+                                        {{user.email}}
+                                    </td>
+                                    <td class="W100">
+
+                                        <select [(ngModel)]="user.rol" class="form-control" (change)="changeRole(user)">
+                                            <option  value="ADMIN_ROLE">Admin</option>
+                                            <option  value="USER_ROLE">User</option>
+                                        </select>
+                                    </td>
+                                    
+                                    <td class="text-nowrap W100 text-center">
+                                        <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                        <a class="cursor" data-toggle="tooltip" data-original-title="Delete" (click)="deleteUser(user.id!)" *ngIf="user.id != auth.id"> <i class="fa fa-close text-danger"></i> </a>
+                                    </td>
+                            
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-group " role="group" aria-label="Basic example" >
+                            <button type="button" class="btn btn-secondary" (click)="previousBlockOfListUsers()" ><i class="fa fa-fast-backward"></i></button>
+                            <!-- <button type="button" class="btn btn-success"><i class="fa fa-play"></i></button> -->
+                            &nbsp;
+                            Pagina : {{from}}
+                            &nbsp;
+                            <button type="button" class="btn btn-secondary" (click)="nextBlockOfListUsers()" ><i class="fa fa-fast-forward"></i></button>
+                            &nbsp;
+                            Total : {{total}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

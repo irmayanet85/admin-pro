@@ -42,9 +42,9 @@ Login register and recover password Page
   display: none; }
 
 .login-sidebar {
-  padding: 0px;
+  padding: 20px;
   margin-top: 0px; }
   .login-sidebar .login-box {
-    right: 0px;
+    right: 20px;
     position: absolute;
     height: 100%; }

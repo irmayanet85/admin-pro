@@ -1,0 +1,172 @@
+<div class="row   ">
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                
+                <div class="col-md-12">
+                    <!-- <input 
+                    type="text" 
+                    placeholder="Buscar ..."
+                    (keyup.enter)="Search()"
+                    #txtSearch
+                    class="form-control form-control-line"> -->
+                    
+                    <input 
+                    type="text" 
+                    placeholder="Buscar2 ..."
+                    [(ngModel)] = search
+                    (keyup.enter)="Search()"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="This top tooltip is themed via CSS variables."
+                    class="form-control form-control-line">
+                </div>
+               
+               
+            </div>
+            
+
+        </div>
+      </div>
+   
+       
+    </div>
+</div>
+
+
+
+<div class="row animated fadeInDown" *ngIf="!list else loading">
+
+<div class="col-12">
+  <div class="alert alert-info text-center" role="alert">
+    <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-2x  fa-refresh " aria-hidden="true"></i>
+    <p class="mb-0"></p>
+  </div>
+</div>
+</div>
+<ng-template #loading>
+</ng-template>
+
+<!-- table of hospital -->
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="card" *ngIf="total > 0">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales</h4>
+                <h6 class="card-subtitle">Hospitales registrados en esta aplicacion.</h6>
+                <div class="d-flex flex-row-reverse" >
+                    <div class="p-2">
+                        <a  (click)="openModal()" class="cursor "    data-toggle="tooltip" data-original-title="Add"> <i class="fa fa-plus text-success m-r-10" ></i> </a>
+                    </div>
+                    <div class="p-2">Adicionar hospital </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Name</th>
+                                <th>registered by</th>
+                                <th class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of list ; let i = index">
+                                <td class=" text-center cursor "> 
+                                    <app-cargar-img [objetselected]="hospital" [typeObject] = "'hospital'"></app-cargar-img>
+                                    
+                                      
+                                </td>
+                                <td>
+                                    <div [hidden]="visible == i">
+
+                                            {{hospital.name}}
+                                        
+                                        <a  (click)="visualizar(i)" class="cursor" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-info m-r-10"></i> </a>
+                                        
+                                    </div>
+                                <input 
+                                type="text" 
+                                placeholder="new name"
+                                [(ngModel)] = newname
+                                (keyup.enter)="editName(i)"
+                                (focusout)="focusOut()"
+                                [id]="'input' + i"
+                                [hidden]="visible != i"
+                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                data-bs-custom-class="custom-tooltip"
+                                data-bs-title="This top tooltip is themed via CSS variables."
+                                class="form-control form-control-line">
+                                </td>
+                                <td>
+                                    {{hospital.usuario!.email}}
+                                </td>
+                                
+                                
+                                <td class="text-nowrap W100 text-center">
+                                    <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                                    <a class="cursor" data-toggle="tooltip" data-original-title="Delete" (click)="deleteHospital(hospital.id!)" *ngIf="hospital.id != auth.id"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                        
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="d-flex flex-row-reverse">
+                        <div class="p-2">
+                            <button type="button" class="btn btn-secondary" (click)="nextBlockOfListUsers()" ><i class="fa fa-fast-forward"></i></button>
+                            Total : {{total}}
+                            
+                        </div>
+                        <div class="p-2">
+                            
+                            <button type="button" class="btn btn-secondary" (click)="previousBlockOfListUsers()" ><i class="fa fa-fast-backward"></i></button>
+                            Pagina : {{from}}
+                            
+                        </div>
+                        <div class="p-2">
+                            
+                        </div>
+
+                    </div>
+                    <!-- <button type="button" class="btn btn-success"><i class="fa fa-play"></i></button> -->
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End table of hospital -->
+
+<!-- modal add new hospital -->
+<div id="responsive-modal" class="modal fade show backgroudModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" [style]="acction">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar un Hospital</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Introduce el nombre del nuevo hospital</h4>
+                        <input type="text" placeholder="name of the hospital"
+                        class="form-control form-control-line"
+                        [(ngModel)] = nameNewHospital autofocus>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal" (click)="cancel()">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light" (click)="saveNewHospital()" >Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

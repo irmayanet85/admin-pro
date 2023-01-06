@@ -1,0 +1,27 @@
+<div class="col">
+    <div class="card">
+      <div class="card-body">
+          
+          <div class="input-group">
+              <span class="input-group-btn">
+                  <button [class]= "colorbotonhijo" (click)="modifica(-10)" type="button">
+                      <i class="fa fa-minus"></i>
+                  </button>
+              </span>
+              <input type="number" 
+                     [(ngModel)]="valorhijo" 
+                     (ngModelChange) = "notificaCambio($event)"
+                     class="form-control" 
+                     [ngClass]="{'is-invalid': invalid}"
+                     min="1"
+                     max="100"
+                     placeholder="Product name">
+              <span class="input-group-btn">
+
+                  <button [class]= "colorbotonhijo"  (click)="modifica(10)" type="button">
+                      <i class="fa fa-plus"></i>
+                  </button>                </span>
+          </div>
+      </div>
+    </div>
+  </div>

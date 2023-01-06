@@ -1,1 +1,40 @@
-<p>progress works!</p>
+<div class="row">
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Striped Progress bar </h4>
+            <div class="progress-bar bg-info progress-bar-striped active" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" [style]=sizecomponent role="progressbar"> <span class="sr-only">85% Complete (success)</span> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Striped Progress bar </h4>
+            <div class="progress-bar bg-primary progress-bar-striped active" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" [style]=sizecomponent2 role="progressbar"> <span class="sr-only">85% Complete (success)</span> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+              <app-incrementador [colorbotonhijo] = "btn" [valorhijo] = "valor" (newvaluehijo)="valor = $event"></app-incrementador>
+          </div>
+        </div>
+    </div>
+   
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+            <app-incrementador [valorhijo] = "valor2" (newvaluehijo)=" valor2 = $event "></app-incrementador>
+        </div>
+      </div>
+    </div>
+  </div>
